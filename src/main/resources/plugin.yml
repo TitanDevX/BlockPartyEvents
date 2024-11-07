@@ -1,0 +1,12 @@
+name: BlockPartyEvents
+main: me.titan.blockpartyevents.EventsPlugin
+version: ${project.version}
+author: ['TitanDev']
+api-version: '1.20'
+description: "An event plugin made for BlockParty server."
+libraries:
+  - 'org.jetbrains.kotlin:kotlin-stdlib:2.0.0'
+  - 'org.jetbrains.kotlin:kotlin-reflect:2.0.0'
+commands:
+  event:
+  eventadmin:

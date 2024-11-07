@@ -1,0 +1,96 @@
+# If true, there will be private channel for the event so players outside the event cant see messages from players who are in the event.
+route_chat: true
+
+format_chat:
+  enabled: true # If true, it will reformat chat according to 'format' below otherwise whatever format your chat plugin provides will be used.
+  format: "&c&l[EVENT] %player_display_name%&7: &f%message%"
+event_start_countdown_title:
+  title: "&b%seconds%"
+  subtitle: ""
+event_start_title:
+  title: "&aEvent started!"
+  subtitle: "&eGoodluck!"
+
+death_match_title: # sent when death match starts.
+  title: "&8&k|||&4&lDEATHMATCH&8&k|||"
+  subtitle: "&7Last player alive wins!"
+death_match_countdown_title: # Last 5 seconds of death match second countdown
+  title: "&b%seconds%"
+  subtitle: ""
+# The times it waits after event finishes before it sends players back to event.
+event_finish_players_spawn_delay: '30s'
+universal_basic_settings:
+  players_amount: '4-100' # <min>-<max>
+  pre_lobby_countdown: '5m'
+  lobby_countdown: '45s/5s' # Format: <Countdown time>/<Broadcast interval (lowest is 1 second)>
+Events:
+  FIL:
+    basic_settings: # Set it to 'universal' to use 'universal_basic_settings' above. ex: basic_settings: universal
+      players_amount: '4-100' # <min>-<max>
+      pre_lobby_countdown: '5m'
+      lobby_countdown: '45s/5s'# Format: <Countdown time>/<Broadcast interval (lowest is 1 second)>
+    human_name: "&c&lFloor Is Lava"
+    lava_rise:
+      interval: '5s'
+      amount: 1 # amount of rise in blocks.
+  OITC:
+    basic_settings: universal
+    lives: 5
+    human_name: "&b&lOITC"
+    items:
+      sword:
+        material: iron_sword
+        display_name: "&f&lSWORD"
+        slot: 0
+      bow:
+        material: BOW
+        display_name: "&3&lBOW"
+        slot: 1
+      arrow:
+        material: ARROW
+        display_name: "&2&lARROW"
+        slot: 2
+  SG:
+    basic_settings: universal
+    human_name: "&6&lSurvival Games"
+    death_match_trigger: 8 # trigger at x players alive.
+    loot_items_amount: '3-10' # how many items there should be in each chest?
+    death_match_first_cd: "30s"
+    death_match_second_cd: "15s"
+    # Config loot items in sg-loot.yml
+  SPLEEF:
+    basic_settings: universal
+    human_name: "&e&lSpleef"
+    environment_blocks: # Blocks thats indestructible, any other blocks will be destructible
+        - stone
+    lose_block: 'bedrock' # the block that if the player stands on, he loses.
+    shovel_shoot_cooldown: 1 # In seconds
+    shovel_item:
+      material: diamond_shovel
+      display_name: "&b&lSPLEED"
+      slot: 0
+      lore:
+        - "&aLorem ipsum dolor sit amet, consectetur adipiscing elit."
+rewards:
+  amount_range: 1-5 # Set the min and max to the same number to make it give all rewards.
+  list:
+    - cmd: "give %player% apple"
+      text: "&eAn apple!"
+    - cmd: "give %player% diamond"
+      text: "&bDiamond!"
+    - cmd: "give %player% gold"
+      text: "&6Gold!"
+    - cmd: "give %player% wheat"
+      text: "&9Wheat!!!!!!!!!!"
+    - cmd: "give %player% dirt"
+      text: "&fShit!"
+mysql:
+  host: "localhost"
+  port: 3306
+  database: "test"
+  user: "root"
+  password: "root"
+  players_table: "blockparty_events_players"
+  spawns_table: "blockparty_events_spawns"
+
+

@@ -1,0 +1,45 @@
+prefix: "&6&lEvents "
+no_permission: "&cYou don't have permission."
+teleporting: "&e&lTeleporting to %event% lobby..."
+lobby_countdown: "%event% &eis starting in %rem_time%.."
+event_cancelled_no_enough_players: "&c%event% has been cancelled because no enough players, so you were teleported back to spawn."
+event_cancelled_by_admin: "&c%event% has been cancelled by an admin, so you were teleported back to spawn."
+event_cancelled_error: "&c%event% has been cancelled because of an error, so you were teleported back to spawn."
+event_join_broadcast: "%event% &2&lis starting in %starting_in%. &6&lCLICK HERE &eto join."
+fil_lava_rise: "&c&lLAVA IS RISING!!!"
+join_fail_already_joined: "&cYou already joined the event."
+join_fail_error: "&cCouldn't join the event due to an error."
+join_fail_no_event: "&cThere is no event currently running!"
+join_fail_full: "&cThe event is full! please try again in a bit."
+join_fail_already_started: "&cThe event has already started, stay alerted for new events!"
+join_broadcast: "&8[&a+&8] &6%player% &ehas joined the event! &7(&b%players%&7/&2%max%&7)"
+lobby_leave_broadcast: "&8[&c-&8] &6%player% &chas left the event &7(&c%players%&7/&2%max%&7)"
+leave_fail_not_joined: "&cYou didn't join the event to leave it!"
+leave_fail_no_event: "&cThere is not event currently running."
+you_left_event: "&cYou left the %event% event."
+player_death_lava: "&e%victim% &chas burned to death."
+player_death_kill: "&e%victim% &chas been killed by &e%killer% "
+player_death: "&e%victim% &cdied."
+leave_broadcast: "&e%player% &chas left the event."
+death_match_alert: "&cDeath match will start in 30 seconds"
+death_match_starting_in: "&cDeath match starts in &e%starts_in%"
+death_match_started: "&4&lDeathmatch has started!"
+oitc_player_respawn: "&6&lYou respawned, &cyou have %lives% lives remaining."
+oitc_no_lives: "&cYou were eliminated from the game because you used all your lives."
+
+## FINISH MESSAGES ##
+# Placeholders:  %winner%, %rewards%(needs to be in a line by itself), %event%
+# Broadcast to all players on server
+event_finish_broadcast: "&a&lThe %event% event has finished!"
+# Message to event winner.
+event_finish_winner:
+  - "&6{chatline}"
+  - "&6&lYou won the %event% event"
+  - "&b&lYou got:"
+  - "%rewards%"
+  - "&6{chatline}"
+# Sent to all players on the event (spectators + winner)
+event_finish_players: "&eThe event has finished."
+########
+# Sent to all players who are still in the event after it finishes (after the delay).
+event_finish_players_after_delay: "&eThe %event% event has finished, so you were teleported back to spawn"

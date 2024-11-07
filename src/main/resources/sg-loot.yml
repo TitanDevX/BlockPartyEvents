@@ -1,0 +1,15 @@
+# Format:
+# Item: <rarity>/<amount>(<min>-<max>, optional) (rarity: the bigger, the more rare)
+# Examples:
+wheat: 1/1-64 # here the rarity is 1 and amount will be a random number between 1 to 64
+diamond: 50 # here we dont define amount means its 1, you dont have to specify amount but you have to specify rarity
+gold: 30/1-2
+diamond_boots: 60
+golden_apple: 55/1-2
+apple: 3/1-10
+water_bucket: 10
+lava_bucket: 20
+wooden_sword: 5
+
+
+
