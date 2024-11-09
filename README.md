@@ -1,4 +1,4 @@
-# BREVENTS CORE
+# BPEVENTS CORE
 
 An extensive event core plugin for BlockParty server.
 
@@ -27,7 +27,7 @@ Ensure maven is installed then run the following command in the project's direct
 ``` mvn clean install```
 
 ## API
-BREvents has the following events:
+BPEvents has the following events:
 ```
 me.titan.blockpartyevents.api.event.EventPhaseStart
 me.titan.blockpartyevents.api.event.EventCancelEvent
