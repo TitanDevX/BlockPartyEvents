@@ -23,6 +23,7 @@ class MainConfig: SimpleConfig("config.yml", plugin()) {
     @ConfigOption(path = "event_start_title")
     var eventStartTitle: ConfigTitle? = null
 
+
     @ConfigOption(path = "death_match_title")
     var deathMatchTitle: ConfigTitle? = null
     @ConfigOption(path = "death_match_countdown_title")
@@ -115,6 +116,9 @@ class MainConfig: SimpleConfig("config.yml", plugin()) {
     fun chatFormatSettings(): Two<Boolean, String?> {
         return Two(config.getBoolean("format_chat.enabled"),
             config.getString("format_chat.format"));
+    }
+    fun getSpawnCommandTemplate(): String {
+        return config.getString("spawn_command", "spawn %player%")!!
     }
     fun getRandomRewards(): List<Reward>{
         val list = ArrayList<Reward>()
