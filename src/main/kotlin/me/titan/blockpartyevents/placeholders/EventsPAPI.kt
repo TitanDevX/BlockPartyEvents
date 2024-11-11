@@ -24,15 +24,19 @@ class EventsPAPI: PlaceholderExpansion() {
         val args = params.split("_")
         if(args.size == 2) {
             if (args[0].equals("wins")) {
+                var pc = PlayerCache.players.getIfPresent(player.uniqueId)
+                if(pc == null){
+                    pc = PlayerCache.getOrLoadPlayerCache(player.uniqueId).call()
+                }
+                if(pc == null) return "0"
                 val type = acceptedEvents.map(args[1])
                 if(type != null){
-                    var pc = PlayerCache.players.getIfPresent(player.uniqueId)
-                    if(pc == null){
-                      pc = PlayerCache.getOrLoadPlayerCache(player.uniqueId).call()
-                    }
-                    if(pc == null) return "0"
+
+
                     return pc.wins.getOrDefault(type,0).toString()
 
+                }else if(args[1].equals("global",ignoreCase = true)){
+                    return pc.getAllWins().toString()
                 }
 
             }
