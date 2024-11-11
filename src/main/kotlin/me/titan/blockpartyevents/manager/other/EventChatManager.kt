@@ -21,7 +21,6 @@ class EventChatManager {
                 return
             }
 
-            event!!.ForAllOnlinePlayers {
                 if (formatSettings.obj1) {
                     e.format = formatSettings.obj2!!
                         .replace("%player_display_name%", "%s")
@@ -30,7 +29,6 @@ class EventChatManager {
 
                 e.recipients.removeIf { !event.onlinePlayers.contains(it) && !event.spectators.contains(it) }
 
-            }
 
         }
     }
