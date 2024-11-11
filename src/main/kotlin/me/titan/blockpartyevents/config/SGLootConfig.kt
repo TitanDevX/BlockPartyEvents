@@ -22,7 +22,7 @@ class SGLootConfig: SimpleConfig("sg-loot.yml", plugin()) {
         }
         for (loot in loots.values) {
             // TODO maybe find a better way to calculate probability.
-            loot.probability = (sum/loot.rarity.toDouble())/sum
+            loot.probability = 1/loot.rarity.toDouble()
         }
         plugin().logger.info("Loaded ${loots.size} survival games loot.")
 
