@@ -6,6 +6,8 @@ import me.titan.blockpartyevents.model.event.EventType
 import me.titan.blockpartyevents.runAsync
 import me.titan.blockpartyevents.util.DbCallable
 import me.titan.blockpartyevents.util.createDbCallable
+import me.titan.titanlib.common.LocationUtil
+import org.bukkit.Location
 import java.util.UUID
 import java.util.concurrent.CompletableFuture
 
@@ -27,6 +29,7 @@ class PlayersDb(val dbManager: DatabaseManager) {
                             "wins_sg INT DEFAULT 0," +
                             "wins_spleef INT DEFAULT 0," +
                             "wins_oitc INT DEFAULT 0," +
+                            "last_loc VARCHAR(100)" +
                             "PRIMARY KEY(uuid))"
                 ).use {
                     it.executeUpdate()
@@ -55,6 +58,9 @@ class PlayersDb(val dbManager: DatabaseManager) {
                             pc.wins[EventType.SG] = it.getInt("wins_sg")
                             pc.wins[EventType.OITC] = it.getInt("wins_oitc")
                             pc.wins[EventType.SPLEEF] = it.getInt("wins_spleef")
+                            it.getString("last_loc")?.let {
+                                pc.lastLoc = LocationUtil.LocfromString(it)
+                            }
                         }
                        return@createDbCallable pc
                     }
@@ -106,5 +112,24 @@ class PlayersDb(val dbManager: DatabaseManager) {
         return f;
 
     }
+    fun updatePlayerCacheLastLoc(uuid: UUID, location: String?): CompletableFuture<Void>  {
 
+        val f = CompletableFuture<Void>();
+        {
+            dbManager.getConnection().use {
+                it.prepareStatement(
+                    "INSERT INTO $table(uuid, last_loc) VALUES(?, ?) ON DUPLICATE KEY UPDATE " +
+                            "last_loc=VALUES(last_loc)").use {
+                    it.setString(1, uuid.toString())
+                    it.setString(2,location)
+                    it.executeUpdate()
+                    f.complete(null)
+                }
+            }
+        }.runAsync().onFailure {
+            f.completeExceptionally(it.cause)
+        }
+        return f;
+
+    }
 }
