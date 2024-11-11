@@ -43,3 +43,4 @@ event_finish_players: "&eThe event has finished."
 ########
 # Sent to all players who are still in the event after it finishes (after the delay).
 event_finish_players_after_delay: "&eThe %event% event has finished, so you were teleported back to spawn"
+teleporting_to_spawn: "&eTeleporting you back to your last location..."
