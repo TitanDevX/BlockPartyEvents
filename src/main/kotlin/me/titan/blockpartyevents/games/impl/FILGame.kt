@@ -51,34 +51,19 @@ class FILGame(event: BREvent, manager: GamePhaseManager): Game(event, manager) {
     override fun tick() {
         val dif = seconds-lastLavaRaise
         if(dif > getConfig().lavaRiseInterval!!/1000){
-            upperLava(getConfig().lavaRiseAmount!!)
+            upperLava()
             lastLavaRaise = seconds
             event.ForAllOnlinePlayers {
                 Messages.FIL_LAVA_RISE.tell(it)
             }
         }
-        upperLava(0)
     }
 
-    /**
-     * So the concept of this function is:
-     * it rises lava 1 block every second with the help of 'todoUppers'
-     * every 'lavaRiseInterval' in config, it calls this method with the configured 'lavaRiseAmount' which typically would be greater than 1
-     * so when this happens this method rises the lava 1 block and adds the remaining of 'lavaRiseAmount'
-     * to 'todoUppers' var, so it can rises lava level in the next ticks, 1 block every second
-     * , decreasing 'todoUppers' every rise.
-     */
-    private fun upperLava(by: Int){
+
+    private fun upperLava(){
 
 
 
-        if(by > 1){
-            todoUppers+=by-1
-        }
-        if(by == 0){
-            if(todoUppers <= 0) return
-            todoUppers--
-        }
             point2.y++
             val maxX = max(point1.blockX,point2.blockX)
             val minX = min(point1.blockX,point2.blockX)
@@ -101,14 +86,12 @@ class FILGame(event: BREvent, manager: GamePhaseManager): Game(event, manager) {
 
     override fun validateConfig(): Boolean {
 
-        val b = arrayOf(getConfig().lavaRiseInterval != null, getConfig().lavaRiseAmount != null).all { it }
+        val b = arrayOf(getConfig().lavaRiseInterval != null).all { it }
         if(b) return b
         if(getConfig().lavaRiseInterval == null){
             plugin().logger.severe("Please set lava rise interval in config. the event will be cancelled.")
         }
-        if(getConfig().lavaRiseAmount == null){
-            plugin().logger.severe("Please set lava rise amount in config. the event will be cancelled.")
-        }
+
         return b
     }
     fun getConfig(): FILEventConfig {
