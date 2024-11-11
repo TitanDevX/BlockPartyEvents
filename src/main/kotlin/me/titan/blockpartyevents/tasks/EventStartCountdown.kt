@@ -18,11 +18,11 @@ abstract class EventStartCountdown(var cc: ConfigCountdown) : BukkitRunnable(){
 
     override fun run() {
 
-        if(true){
-            // TODO REMOVE
-            cancel()
-            finish()
-        }
+//        if(true){
+//            // TODO REMOVE
+//            cancel()
+//            finish()
+//        }
 
         val timeUntilFinish = cc.time-currentTime
         val timeUntilNextBd = cc.period-(currentTime-lastTick)
