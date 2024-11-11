@@ -41,7 +41,8 @@ enum class Messages {
     EVENT_FINISH_WINNER,
     EVENT_FINISH_PLAYERS,
     EVENT_FINISH_PLAYERS_AFTER_DELAY,
-    LEAVE_FAIL_NO_EVENT;
+    LEAVE_FAIL_NO_EVENT,
+    TELEPORTING_TO_SPAWN;
 
     var defaultMsg: String? = null
 
