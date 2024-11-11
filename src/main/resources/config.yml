@@ -1,6 +1,7 @@
 # If true, there will be private channel for the event so players outside the event cant see messages from players who are in the event.
 route_chat: true
-
+# Spawn command in case we couldn't teleport player to his last location for some reason.
+spawn_command: "spawn %player%"
 format_chat:
   enabled: true # If true, it will reformat chat according to 'format' below otherwise whatever format your chat plugin provides will be used.
   format: "&c&l[EVENT] %player_display_name%&7: &f%message%"
@@ -32,7 +33,6 @@ Events:
     human_name: "&c&lFloor Is Lava"
     lava_rise:
       interval: '5s'
-      amount: 1 # amount of rise in blocks.
   OITC:
     basic_settings: universal
     lives: 5
