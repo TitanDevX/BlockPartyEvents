@@ -10,8 +10,6 @@ class FILEventConfig(sc: SimpleConfig) : EventConfig(sc) {
     @ConfigOption(path = "lava_rise.interval", parseTime = true)
     var lavaRiseInterval: Long? = null
 
-    @ConfigOption(path = "lava_rise.amount")
-    var lavaRiseAmount: Int? = null
 
     override fun pathPrefix(): String {
         return "Events.${EventType.FIL.name}."
