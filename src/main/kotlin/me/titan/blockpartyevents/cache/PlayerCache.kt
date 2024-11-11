@@ -5,6 +5,8 @@ import com.google.common.cache.CacheBuilder
 import me.titan.blockpartyevents.model.event.EventType
 import me.titan.blockpartyevents.plugin
 import me.titan.blockpartyevents.util.DbCallable
+import me.titan.titanlib.common.LocationUtil
+import org.bukkit.Location
 import java.util.*
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.TimeUnit
@@ -13,6 +15,7 @@ import kotlin.collections.HashMap
 
 class PlayerCache(val uuid: UUID) {
     val wins = HashMap<EventType, Int>()
+    var lastLoc: Location? = null
 
     fun getAllWins(): Int {
         return wins.values.sum()
@@ -58,7 +61,23 @@ class PlayerCache(val uuid: UUID) {
         fun cache(uuid: UUID, playerCache: PlayerCache){
             players.put(uuid,playerCache)
         }
-
+        /**
+         * Updates player's last location
+         *
+         * ###### You can call this method safely without checking for player existence in the db
+         */
+        @JvmStatic
+        fun updateLastLoc(uuid: UUID,lastLoc: Location?): CompletableFuture<Void> {
+            val str = if(lastLoc == null) LocationUtil.LocToString(lastLoc) else null
+            val f = plugin().playersDb.updatePlayerCacheLastLoc(uuid,str)
+            // Update if there is a stored cache instance.
+            f.thenAccept {
+                players.getIfPresent(uuid)?.let {
+                    it.lastLoc = lastLoc
+                }
+            }
+            return f
+        }
         /**
          * Updates player's event wins.
          *
