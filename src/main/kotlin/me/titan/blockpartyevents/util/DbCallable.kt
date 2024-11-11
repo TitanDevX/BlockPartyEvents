@@ -46,9 +46,10 @@ abstract class DbCallable<T>: Callable<T> {
         return f
 
     }
-    fun thenAccept(func: (T?, Throwable?) -> Unit){
+    fun thenAccept(func: (T?, Throwable?) -> Unit): DbCallable<T>{
 
         ac.add(func)
+        return this
     }
 
     companion object {
