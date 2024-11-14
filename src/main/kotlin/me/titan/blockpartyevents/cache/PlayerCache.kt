@@ -25,15 +25,13 @@ class PlayerCache(val uuid: UUID) {
     companion object {
 
         @JvmStatic
-        val players: Cache<UUID, PlayerCache> = CacheBuilder.newBuilder()
-            .expireAfterAccess(1,TimeUnit.MINUTES).build<UUID,PlayerCache>()
-
+        val players = HashMap<UUID, PlayerCache>()
         @JvmStatic
         /**
         * Gets loaded PlayerCache in memory otherwise returns an empty PlayerCache.
         */
         fun getPlayerCache(uuid: UUID): PlayerCache {
-            return players.get(uuid) {PlayerCache(uuid)};
+            return players.computeIfAbsent(uuid) {PlayerCache(uuid)};
         }
 
         /**
@@ -41,7 +39,7 @@ class PlayerCache(val uuid: UUID) {
          */
         @JvmStatic
         fun getOrLoadPlayerCache(uuid: UUID): DbCallable<PlayerCache> {
-            val pc = players.getIfPresent(uuid)
+            val pc = players[uuid]
             if(pc != null){
                 return DbCallable.computedDbCallable(pc)
             }
@@ -72,7 +70,7 @@ class PlayerCache(val uuid: UUID) {
             val f = plugin().playersDb.updatePlayerCacheLastLoc(uuid,str)
             // Update if there is a stored cache instance.
             f.thenAccept {
-                players.getIfPresent(uuid)?.let {
+                players[uuid]?.let {
                     it.lastLoc = lastLoc
                 }
             }
@@ -88,7 +86,7 @@ class PlayerCache(val uuid: UUID) {
            val f = plugin().playersDb.updatePlayerCacheWins(uuid,event,newWins)
             // Update if there is a stored cache instance.
             f.thenAccept {
-                 players.getIfPresent(uuid)?.let {
+                 players.get(uuid)?.let {
                      it.wins[event] = newWins
                  }
             }
@@ -111,7 +109,7 @@ class PlayerCache(val uuid: UUID) {
 
                 return@whenComplete
                 }
-                players.getIfPresent(uuid)?.let {
+                players.get(uuid)?.let {
                     it.wins[event] = it.wins.getOrDefault(event,0)+1
                 }
             }

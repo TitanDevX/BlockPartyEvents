@@ -24,7 +24,7 @@ class EventsPAPI: PlaceholderExpansion() {
         val args = params.split("_")
         if(args.size == 2) {
             if (args[0].equals("wins")) {
-                var pc = PlayerCache.players.getIfPresent(player.uniqueId)
+                var pc = PlayerCache.players.get(player.uniqueId)
                 if(pc == null){
                     pc = PlayerCache.getOrLoadPlayerCache(player.uniqueId).call()
                 }
